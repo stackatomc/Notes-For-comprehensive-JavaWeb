@@ -26,6 +26,7 @@ public class jdbcAndCommit {
             if(conn!=null){
                 //1 关闭自动提交事务
                 conn.setAutoCommit(false);
+                conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
 
                 String query="insert into course values (?,?,?)";
                 pstmt=conn.prepareStatement(query);
@@ -48,7 +49,8 @@ public class jdbcAndCommit {
                 System.out.println("Failed to make connection!");
             }
         }catch(SQLException e){
-            //3 在catch中对若出现异常进行回滚
+            //3 在catch中对若出现异常进行回滚，还可以设置setSavaepoint和releaseSavepoint设置和释放保存点
+            //，这样rollback可会到指定的位置而不是事务的开始位置，但不推荐这种做法
             conn.rollback();
             System.out.println("Some of students were not inserted corrently." +
                     "please check the student table and insert manually.");
