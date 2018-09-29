@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <beans>
+        <bean name="HelloWorldSpring" class="Test511.HelloWorldSpring"/>
+        <bean name="SayHello" class="Test511.SayHello">
+            <property name="helloWorldSpring" ref="HelloWorldSpring"/>
+        </bean>
+
+
+    </beans>
+</beans>
