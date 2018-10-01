@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <class name="Account" table="t_account">
+        <id name="accountID" column="accountID" type="int">
+
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="20" not-null="true"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="20" not-null="true"/>
+        </property>
+
+        <one-to-one name="card" class="model.Card" cascade="all"/>
+        <list name="bankServices" inverse="true" table="t_account" cascade="all">
+            <key column="accountID"/>
+            <list-index column="bankServiceID"/>
+            <one-to-many class="model.BankService"/>
+        </list>
+    </class>
+
+</hibernate-mapping>
